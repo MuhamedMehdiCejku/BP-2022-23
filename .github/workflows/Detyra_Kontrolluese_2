@@ -1,0 +1,66 @@
+Të shkruhet programi në C++ i cili përmbush këto kërkesa:
+1) Të krijohet liveli i studimeve me enum;
+2) Të krijohet struktura Profile {name, id, level, study_year, gpa, scholarship_gpa};
+3) Të krijohen katër (4) instanca për këtë strukturë. Të dhënat të jepen nga tastiera;
+4) Të krijohet funksioni që tregon nëse studenti fiton bursë nga nota e tij mesatare.
+Nota mesatare për të fituar bursë është <8.0;
+5) Të krijohet funksioni i cili tregon studentin më të dalluar.
+
+#include <iostream>
+#include <string>
+
+enum class Level {
+    Bachelor,
+    Master,
+    PhD
+};
+
+struct Profile {
+    std::string name;
+    std::string id;
+    Level level;
+    int study_year;
+    double gpa;
+    double scholarship_gpa;
+};
+
+int main() {
+    Profile students[4];
+    double max_gpa = 0;
+    Profile best_student;
+
+    for (int i = 0; i < 4; i++) {
+        std::cout << "Emri i studentit: ";
+        std::cin >> students[i].name;
+
+        std::cout << "ID e studentit: ";
+        std::cin >> students[i].id;
+
+        std::cout << "Viti i studimeve: ";
+        std::cin >> students[i].study_year;
+
+        std::cout << "Trego livelin (0 for Bachelor, 1 for Master, 2 for PhD): ";
+        int level;
+        std::cin >> level;
+        students[i].level = static_cast<Level>(level);
+
+        std::cout << "Nota mesatare: ";
+        std::cin >> students[i].gpa;
+
+        if (students[i].gpa > 8.0) {
+            students[i].scholarship_gpa = students[i].gpa;
+            std::cout << "Studenti " << students[i].name << " fiton burse!\n";
+        } else {
+            students[i].scholarship_gpa = 0;
+        }
+
+        if (students[i].gpa > max_gpa) {
+            max_gpa = students[i].gpa;
+            best_student = students[i];
+        }
+    }
+
+    std::cout << "Studenti me i mire: " << best_student.name << " me mesatare " << max_gpa << std::endl;
+
+    return 0;
+}
