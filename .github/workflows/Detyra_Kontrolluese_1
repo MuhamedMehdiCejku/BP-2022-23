@@ -1,0 +1,50 @@
+Te deklarohet vargu ne C++ ne te cilin mund te vendosen 8 numra me presje nga tastiera. 
+Programi ne fund duhet te shtyp: 
+1) Mesataren e numrave tek ne pozita cifte brenda vargutë
+2) Shumen e numrave cift ne pozita tek brenda vargutë
+3) Te shtypet nje varg i ri, po ashtu me 8 anetare, ku ne secilen pozite vendoset vlera e ne poziten 
+e njejte te vargut te inicializuar me larte, duke e mbledhur me anetarin ne poziten fqinje ne te djathte. 
+Per anetarin e fundit te vargut te ri, te merret shuma e anetarit te fundit dhe te pare te vargut.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int varg[8];
+    for (int i = 0; i < 8; i++) {
+        cin >> varg[i];
+    }
+
+    int cift_count = 0;
+    int cift_sum = 0;
+    for (int i = 0; i < 8; i++) {
+        if (i % 2 == 0) {
+            cift_count++;
+            cift_sum += varg[i];
+        }
+    }
+    cout << "Mesatarja e numrave tek pozita cifte: " << (double)cift_sum / cift_count << endl;
+
+    int cift_sum_2 = 0;
+    for (int i = 0; i < 8; i++) {
+        if (i % 2 == 0 && varg[i] % 2 == 0) {
+            cift_sum_2 += varg[i];
+        }
+    }
+    cout << "Shuma e numrave cift ne pozita tek: " << cift_sum_2 << endl;
+
+    int varg_ri[8];
+    varg_ri[0] = varg[0];
+    for (int i = 1; i < 8; i++) {
+        varg_ri[i] = varg[i] + varg[i-1];
+    }
+    varg_ri[7] += varg[0];
+
+    cout << "Vargu i ri: ";
+    for (int i = 0; i < 8; i++) {
+        cout << varg_ri[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
